@@ -38,3 +38,39 @@ error_Oh_log = np.abs(deriv_Oh_log - real_deriv_log)
 error_Oh4_sin = np.abs(deriv_Oh4_sin - real_deriv_sin)
 error_Oh4_log = np.abs(deriv_Oh4_log - real_deriv_log)
 
+#  Crea una figura de tamaño 10x6 pulgadas (ancho x alto)
+plt.figure(figsize=(10, 6))
+
+# 🔁 Recorre los 100 valores de x (cada uno tiene un vector de 18 errores distintos para h)
+for i in range(100):
+    #  Grafica el error para el método de orden O(h)
+    plt.loglog(h, error_Oh_log[i], color='blue', alpha=0.1)
+
+    #  Grafica el error para el método de orden O(h^4)
+    plt.loglog(h, error_Oh4_log[i], color='red', alpha=0.1)
+
+    #  Usamos alpha=0.1 para que las curvas sean transparentes y no saturen el gráfico
+    #  loglog = escala logarítmica en ambos ejes (eje x = h, eje y = error)
+
+#  Etiqueta del eje x
+plt.xlabel("h")
+
+#  Etiqueta del eje y
+plt.ylabel("Error absoluto")
+
+#  Título del gráfico
+plt.title("Error de derivación numérica para f(x) = log(x)")
+
+#  Muestra una leyenda identificando los colores
+plt.legend(["Orden O(h)", "Orden O(h^4)"], loc='lower right')
+
+#  Agrega una cuadrícula para facilitar la lectura
+plt.grid(True)
+
+#  Ajusta automáticamente el diseño para que no se sobrepongan etiquetas
+plt.tight_layout()
+
+#  Muestra el gráfico en pantalla
+plt.show()
+
+
